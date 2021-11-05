@@ -38,7 +38,6 @@ const initialUserData = () => {
 };
 
 const Main = () => {
-  // console.log(initialUserData());
   const classes = useStyles();
   const [user, setUser] = useState<IUserData>(initialUserData());
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
@@ -160,7 +159,6 @@ const Main = () => {
         <Toolbar />
         <TextField
           id="input-with-icon-textfield"
-          // inputProps={{ min: 0, style: { textAlign: "center" } }}
           fullWidth
           InputProps={{
             endAdornment: (
