@@ -16,18 +16,14 @@ import { InputAdornment, TextField } from "@mui/material";
 
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
-import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
-import FreeBreakfastIcon from "@mui/icons-material/FreeBreakfast";
-import CakeIcon from "@mui/icons-material/Cake";
 import SearchIcon from "@mui/icons-material/Search";
 
-import { IUserData } from "./types";
-import { EUrls } from "../../consts/urls";
+import { TUserData } from "./types";
 
 import { useStyles } from "./styles";
+import { crmList } from "../../consts/sidebarCrm";
 
-const drawerWidth = 240;
+const drawerWidth: number = 240;
 
 const initialUserData = () => {
   const userData = JSON.parse(localStorage.getItem("userData") || "");
@@ -39,25 +35,13 @@ const initialUserData = () => {
 
 const Main = () => {
   const classes = useStyles();
-  const [user, setUser] = useState<IUserData>(initialUserData());
+  const [user, setUser] = useState<TUserData>(initialUserData());
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [activeListItem, setActiveListItem] = useState<number | null>(null);
 
-  const handleDrawerToggle = () => {
+  const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen);
   };
-
-  const crmList = [
-    { text: "Личный кабинет", icon: <PersonIcon />, path: EUrls.MAIN, id: 1 },
-    {
-      text: "Дежурство",
-      icon: <CleaningServicesIcon />,
-      path: EUrls.DUTY,
-      id: 2,
-    },
-    { text: "Обед", icon: <FreeBreakfastIcon />, path: EUrls.BREAKFAST, id: 3 },
-    { text: "Дни рождения", icon: <CakeIcon />, path: EUrls.BIRTHDAY, id: 4 },
-  ];
 
   useEffect(() => {
     setActiveListItem(crmList[0].id);

@@ -1,24 +1,21 @@
 import Main from "../pages/main";
+import { TRoutes } from "./types";
 import { EUrls } from "./urls";
 
-export const ROUTES = [
+export const ROUTES: Array<TRoutes> = [
   {
-    exact: true,
     path: EUrls.MAIN,
     component: <Main />,
   },
   {
-    exact: true,
     path: EUrls.BREAKFAST,
     component: <Main />,
   },
   {
-    exact: true,
     path: EUrls.DUTY,
     component: <Main />,
   },
   {
-    exact: true,
     path: EUrls.BIRTHDAY,
     component: <Main />,
   },

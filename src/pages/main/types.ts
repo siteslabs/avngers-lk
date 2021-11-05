@@ -1,3 +1,3 @@
-export interface IUserData {
+export type TUserData = {
   name: string | null;
-}
+};
