@@ -12,7 +12,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
 import { InputAdornment, TextField } from "@mui/material";
 
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -26,25 +25,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { IUserData } from "./types";
 import { EUrls } from "../../consts/urls";
 
-const useStyles = makeStyles({
-  header: {
-    alignItems: "center",
-  },
-  link: {
-    textDecoration: "none",
-    color: "#2D4452",
-  },
-  greeting: {
-    paddingTop: "20px",
-    paddingBottom: "20px",
-  },
-  news: {
-    width: "100%",
-    height: "500px",
-    padding: "15px",
-    backgroundColor: "grey",
-  },
-});
+import { useStyles } from "./styles";
 
 const drawerWidth = 240;
 
