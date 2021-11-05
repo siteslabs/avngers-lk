@@ -21,12 +21,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import { TUserData } from "./types";
 
 import { useStyles } from "./styles";
+
 import { crmList } from "../../consts/sidebarCrm";
+
+import { JSONConvert } from "../../utils/jsonConverts";
+import { localStorageHelper } from "../../utils/localStorageHelper";
 
 const drawerWidth: number = 240;
 
 const initialUserData = () => {
-  const userData = JSON.parse(localStorage.getItem("userData") || "");
+  const userData = JSONConvert(localStorageHelper("userData", "getItem") || "");
   if (userData) {
     return userData;
   }
@@ -46,7 +50,11 @@ const Main = () => {
   useEffect(() => {
     setActiveListItem(crmList[0].id);
 
-    localStorage.setItem("userData", JSON.stringify({ name: "Самат" }));
+    localStorageHelper(
+      "userData",
+      "setItem",
+      JSONConvert({ name: "Самат" }, "stringify")
+    );
   }, []);
 
   const drawer = (
