@@ -179,7 +179,6 @@ const Main = () => {
         <Toolbar />
         <TextField
           id="input-with-icon-textfield"
-          // inputProps={{ min: 0, style: { textAlign: "center" } }}
           fullWidth
           InputProps={{
             endAdornment: (
