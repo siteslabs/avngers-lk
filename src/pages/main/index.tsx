@@ -82,7 +82,7 @@ const Main = () => {
   useEffect(() => {
     setActiveListItem(crmList[0].id);
 
-    localStorage.setItem("userData", JSON.stringify({ name: "Beka" }));
+    localStorage.setItem("userData", JSON.stringify({ name: "Самат" }));
   }, []);
 
   const drawer = (
