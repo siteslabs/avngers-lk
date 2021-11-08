@@ -24,11 +24,11 @@ import { TUserData } from "./types";
 
 import {
   DrawerHeader,
-  SBox,
+  StyledBox,
   useStyles,
-  SAppBar,
-  SIconButton,
-  STypography,
+  StyledAppBar,
+  StyledIconButton,
+  StyledTypography,
 } from "./styles";
 
 import { crmList } from "../../consts/sidebarCrm";
@@ -105,28 +105,28 @@ const Main = () => {
     </div>
   );
   return (
-    <SBox>
+    <StyledBox>
       <CssBaseline />
-      <SAppBar
+      <StyledAppBar
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
       >
         <Toolbar>
-          <SIconButton
+          <StyledIconButton
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
-          </SIconButton>
+          </StyledIconButton>
           <Typography variant="h6" noWrap component="div">
             Avengers
           </Typography>
         </Toolbar>
-      </SAppBar>
+      </StyledAppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -174,13 +174,13 @@ const Main = () => {
           }}
           variant="outlined"
         />
-        <STypography paragraph>
+        <StyledTypography paragraph>
           Добрый день, {user.name || "Пользователь"}
-        </STypography>
+        </StyledTypography>
 
         <div className={classes.news}>Объявления и новости.</div>
       </Box>
-    </SBox>
+    </StyledBox>
   );
 };
 

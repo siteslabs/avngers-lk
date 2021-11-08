@@ -21,19 +21,19 @@ export const useStyles = makeStyles({
   },
 });
 
-export const SBox = styled(Box)`
+export const StyledBox = styled(Box)`
   display: flex;
 `;
 
-export const SAppBar = styled(AppBar)`
+export const StyledAppBar = styled(AppBar)`
   position: fixed;
 `;
 
-export const SIconButton = styled(IconButton)`
+export const StyledIconButton = styled(IconButton)`
   color: inherit;
 `;
 
-export const STypography = styled(Typography)`
+export const StyledTypography = styled(Typography)`
   padding-top: "20px";
   padding-bottom: "20px";
 `;
