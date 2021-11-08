@@ -33,7 +33,7 @@ import CustomDrawer from "../../Components/CustomDrawer";
 const drawerWidth: number = 240;
 
 const initialUserData = (): TUserData => {
-  const userData = JSONConvert(localStorageHelper("userData", "getItem") || "");
+  const userData = JSONConvert(localStorageHelper("userData") || "");
   if (userData) {
     return userData;
   }
@@ -54,11 +54,7 @@ const Main = () => {
   };
 
   useEffect(() => {
-    localStorageHelper(
-      "userData",
-      "setItem",
-      JSONConvert({ name: "Самат" }, "stringify")
-    );
+    localStorageHelper("userData", JSONConvert({ name: "Самат" }, false));
 
     if (route) {
       setActiveListItem(
