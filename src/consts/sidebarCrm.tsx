@@ -6,7 +6,7 @@ import CakeIcon from "@mui/icons-material/Cake";
 import { EUrls } from "./urls";
 import { TCrmList } from "./types";
 
-export const crmList: Array<TCrmList> = [
+export const crmList: TCrmList[] = [
   { text: "Личный кабинет", icon: <PersonIcon />, path: EUrls.MAIN, id: 1 },
   {
     text: "Дежурство",
