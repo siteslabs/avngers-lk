@@ -32,7 +32,7 @@ import CustomDrawer from "../../Components/CustomDrawer";
 
 const drawerWidth: number = 240;
 
-const initialUserData = () => {
+const initialUserData = (): TUserData => {
   const userData = JSONConvert(localStorageHelper("userData", "getItem") || "");
   if (userData) {
     return userData;

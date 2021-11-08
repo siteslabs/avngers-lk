@@ -1,3 +1,3 @@
 export type TUserData = {
-  name: string | null;
+  name?: string | null;
 };
