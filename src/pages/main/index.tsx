@@ -22,7 +22,14 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { TUserData } from "./types";
 
-import { DrawerHeader, useStyles } from "./styles";
+import {
+  DrawerHeader,
+  SBox,
+  useStyles,
+  SAppBar,
+  SIconButton,
+  STypography,
+} from "./styles";
 
 import { crmList } from "../../consts/sidebarCrm";
 
@@ -98,30 +105,28 @@ const Main = () => {
     </div>
   );
   return (
-    <Box sx={{ display: "flex" }}>
+    <SBox>
       <CssBaseline />
-      <AppBar
-        position="fixed"
+      <SAppBar
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
+          <SIconButton
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
-          </IconButton>
+          </SIconButton>
           <Typography variant="h6" noWrap component="div">
             Avengers
           </Typography>
         </Toolbar>
-      </AppBar>
+      </SAppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -169,13 +174,13 @@ const Main = () => {
           }}
           variant="outlined"
         />
-        <Typography className={classes.greeting} paragraph>
+        <STypography paragraph>
           Добрый день, {user.name || "Пользователь"}
-        </Typography>
+        </STypography>
 
         <div className={classes.news}>Объявления и новости.</div>
       </Box>
-    </Box>
+    </SBox>
   );
 };
 
