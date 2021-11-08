@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
+import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -20,12 +22,13 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { TUserData } from "./types";
 
-import { useStyles } from "./styles";
+import { DrawerHeader, useStyles } from "./styles";
 
 import { crmList } from "../../consts/sidebarCrm";
 
 import { JSONConvert } from "../../utils/jsonConverts";
 import { localStorageHelper } from "../../utils/localStorageHelper";
+import CustomDrawer from "../../Components/CustomDrawer";
 
 const drawerWidth: number = 240;
 
@@ -38,32 +41,52 @@ const initialUserData = () => {
 };
 
 const Main = () => {
-  const classes = useStyles();
   const [user, setUser] = useState<TUserData>(initialUserData());
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const [activeListItem, setActiveListItem] = useState<number | null>(null);
+
+  const classes = useStyles();
+  const { route } = useParams();
+  const theme = useTheme();
 
   const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen);
   };
 
   useEffect(() => {
-    setActiveListItem(crmList[0].id);
-
     localStorageHelper(
       "userData",
       "setItem",
       JSONConvert({ name: "Самат" }, "stringify")
     );
+
+    if (route) {
+      setActiveListItem(
+        crmList.filter((path) => path.path === `/${route}`)[0]?.id
+      );
+    } else {
+      setActiveListItem(1);
+    }
   }, []);
 
   const drawer = (
     <div>
-      <Toolbar />
+      <DrawerHeader>
+        <IconButton
+          onClick={() => setMobileOpen(false)}
+          sx={{ mr: 2, display: { sm: "none" } }}
+        >
+          {theme.direction === "ltr" ? (
+            <ChevronLeftIcon />
+          ) : (
+            <ChevronRightIcon />
+          )}
+        </IconButton>
+      </DrawerHeader>
       <Divider />
       <List>
         {crmList.map((crm) => (
-          <Link to={crm.path} className={classes.link}>
+          <Link key={crm.path} to={crm.path} className={classes.link}>
             <ListItem
               onClick={() => setActiveListItem(crm.id)}
               selected={crm.id === activeListItem}
@@ -109,36 +132,25 @@ const Main = () => {
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
+        <CustomDrawer
           variant="temporary"
-          open={mobileOpen}
+          drawerWidth={drawerWidth}
           onClose={handleDrawerToggle}
+          open={mobileOpen}
+          display={{ xs: "block", sm: "none" }}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
         >
           {drawer}
-        </Drawer>
-        <Drawer
+        </CustomDrawer>
+        <CustomDrawer
           variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
+          drawerWidth={drawerWidth}
+          display={{ xs: "none", sm: "block" }}
         >
           {drawer}
-        </Drawer>
+        </CustomDrawer>
       </Box>
       <Box
         component="main"
