@@ -4,11 +4,11 @@ import { EUrls } from "./urls";
 
 export const ROUTES: TRoutes[] = [
   {
-    path: EUrls.MAIN,
+    path: `/:route`,
     component: <Main />,
   },
   {
-    path: `/:route`,
+    path: EUrls.MAIN,
     component: <Main />,
   },
 ];

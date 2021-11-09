@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { InputAdornment, TextField } from "@mui/material";
 
+import IconButton from "@mui/material/IconButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 
 import { TUserData } from "./types";
 
@@ -25,14 +22,18 @@ import {
   useStyles,
   StyledAppBar,
   StyledIconButton,
-  StyledTypography,
 } from "./styles";
 
 import { crmList } from "../../consts/sidebarCrm";
+import { EUrls } from "../../consts/urls";
 
 import { JSONConvert } from "../../utils/jsonConverts";
 import { localStorageHelper } from "../../utils/localStorageHelper";
+
 import CustomDrawer from "../../Components/CustomDrawer";
+
+import PAccount from "./pageContents/PAccount";
+import Statistics from "./pageContents/Statistics";
 
 const drawerWidth: number = 240;
 
@@ -154,23 +155,9 @@ const Main = () => {
         }}
       >
         <Toolbar />
-        <TextField
-          id="input-with-icon-textfield"
-          fullWidth
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-          variant="outlined"
-        />
-        <StyledTypography paragraph>
-          Добрый день, {user.name || "Пользователь"}
-        </StyledTypography>
-
-        <div className={classes.news}>Объявления и новости.</div>
+        {(route === EUrls.STATISTICS.slice(1) && <Statistics />) || (
+          <PAccount user={user} />
+        )}
       </Box>
     </StyledBox>
   );
