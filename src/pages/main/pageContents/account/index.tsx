@@ -1,8 +1,6 @@
 import { InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-
 import { StyledTypography, useStyles } from "../../styles";
-
 import { TPAccount } from "./types";
 
 const PAccount: React.FC<TPAccount> = ({ user }): JSX.Element => {

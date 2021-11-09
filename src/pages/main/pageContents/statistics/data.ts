@@ -1,3 +1,4 @@
+// hardCode data
 export const pieChart = {
   chart: {
     type: "pie",
@@ -43,7 +44,7 @@ export const pieChart = {
     },
   ],
 };
-
+// hardCode data
 export const areasplineChart = {
   chart: {
     type: "areaspline",
@@ -59,7 +60,7 @@ export const areasplineChart = {
     { name: "Jane", data: [2, 4, 8] },
   ],
 };
-
+// hardCode data
 export const columnChart = {
   chart: {
     type: "column",

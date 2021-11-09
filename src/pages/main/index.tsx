@@ -1,57 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-
-import IconButton from "@mui/material/IconButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import { TUserData } from "./types";
-
-import {
-  DrawerHeader,
-  StyledBox,
-  useStyles,
-  StyledAppBar,
-  StyledIconButton,
-} from "./styles";
-
-import { crmList } from "../../consts/sidebarCrm";
+import { StyledBox, StyledAppBar, StyledIconButton } from "./styles";
 import { EUrls } from "../../consts/urls";
-
 import { JSONConvert } from "../../utils/jsonConverts";
 import { localStorageHelper } from "../../utils/localStorageHelper";
-
 import CustomDrawer from "../../Components/CustomDrawer";
-
-import PAccount from "./pageContents/PAccount";
-import Statistics from "./pageContents/Statistics";
-
-const drawerWidth: number = 240;
-
-const initialUserData = (): TUserData => {
-  const userData = JSONConvert(localStorageHelper("userData") || "");
-  if (userData) {
-    return userData;
-  }
-  return {};
-};
+import Account from "./pageContents/account";
+import Statistics from "./pageContents/statistics";
+import Drawer from "../../Components/Drawer";
+import { drawerWidth, initialUserData } from "./utils";
 
 const Main = () => {
-  const [user, setUser] = useState<TUserData>(initialUserData());
+  const location = useLocation();
+  const user: TUserData = initialUserData();
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
-  const [activeListItem, setActiveListItem] = useState<number | null>(null);
-
-  const classes = useStyles();
-  const { route } = useParams();
 
   const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen);
@@ -59,44 +28,8 @@ const Main = () => {
 
   useEffect(() => {
     localStorageHelper("userData", JSONConvert({ name: "Самат" }, false));
-
-    if (route) {
-      setActiveListItem(
-        crmList.filter((path) => path.path === `/${route}`)[0]?.id
-      );
-    } else {
-      setActiveListItem(1);
-    }
   }, []);
 
-  const drawer = (
-    <div>
-      <DrawerHeader>
-        <IconButton
-          onClick={() => setMobileOpen(false)}
-          sx={{ mr: 2, display: { sm: "none" } }}
-        >
-          <MenuIcon />
-        </IconButton>
-      </DrawerHeader>
-      <Divider />
-      <List>
-        {crmList.map((crm) => (
-          <Link key={crm.path} to={crm.path} className={classes.link}>
-            <ListItem
-              onClick={() => setActiveListItem(crm.id)}
-              selected={crm.id === activeListItem}
-              button
-              key={crm.id}
-            >
-              <ListItemIcon>{crm.icon}</ListItemIcon>
-              <ListItemText primary={crm.text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-    </div>
-  );
   return (
     <StyledBox>
       <CssBaseline />
@@ -136,14 +69,14 @@ const Main = () => {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          {drawer}
+          <Drawer setMobileOpen={setMobileOpen} />
         </CustomDrawer>
         <CustomDrawer
           variant="permanent"
           drawerWidth={drawerWidth}
           display={{ xs: "none", sm: "block" }}
         >
-          {drawer}
+          <Drawer setMobileOpen={setMobileOpen} />
         </CustomDrawer>
       </Box>
       <Box
@@ -155,8 +88,8 @@ const Main = () => {
         }}
       >
         <Toolbar />
-        {(route === EUrls.STATISTICS.slice(1) && <Statistics />) || (
-          <PAccount user={user} />
+        {(location.pathname === EUrls.STATISTICS && <Statistics />) || (
+          <Account user={user} />
         )}
       </Box>
     </StyledBox>
