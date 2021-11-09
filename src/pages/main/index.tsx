@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { useTheme } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -54,7 +51,6 @@ const Main = () => {
 
   const classes = useStyles();
   const { route } = useParams();
-  const theme = useTheme();
 
   const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen);
@@ -79,11 +75,7 @@ const Main = () => {
           onClick={() => setMobileOpen(false)}
           sx={{ mr: 2, display: { sm: "none" } }}
         >
-          {theme.direction === "ltr" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
+          <MenuIcon />
         </IconButton>
       </DrawerHeader>
       <Divider />
