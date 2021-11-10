@@ -3,4 +3,5 @@ export enum EUrls {
   BREAKFAST = "/breakfast",
   DUTY = "/duty",
   BIRTHDAY = "/birthday",
+  STATISTICS = "/statistics",
 }
